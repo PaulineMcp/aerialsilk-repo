@@ -43,9 +43,7 @@ Sinon, tu retournes un message d’erreur ou une réponse vide.
 
 Dans ton code JavaScript côté navigateur :
 
-    - Tu captes ce que l’utilisateur a tapé dans l’input.
-    - Tu fais un appel fetch() vers ton API avec le nom recherché.
-
-    Tu reçois une réponse en JSON.
-
-    Tu l’affiches proprement dans la page.
+- Tu captes ce que l’utilisateur a tapé dans l’input.
+- Tu fais un appel fetch() vers ton API avec le nom recherché.
+- Tu reçois une réponse en JSON.
+- Tu l’affiches proprement dans la page.
