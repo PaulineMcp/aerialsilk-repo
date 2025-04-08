@@ -1,0 +1,23 @@
+{
+  "name": "aerial_repo",
+  "version": "1.0.0",
+  "main": "express_serveur.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/PaulineMcp/aerialsilk-repo.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/PaulineMcp/aerialsilk-repo/issues"
+  },
+  "homepage": "https://github.com/PaulineMcp/aerialsilk-repo#readme",
+  "description": "",
+  "dependencies": {
+    "express": "^5.1.0",
+    "path": "^0.12.7"
+  }
+}
