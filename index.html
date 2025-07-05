@@ -6,12 +6,13 @@
     <title>Document title</title>
   </head>
   <body>
+    <form action="/sql_user_request_criteria" method="get">
     <div id ="request-box" style = "background-color: lightblue;">
       <label for="site-search">Recherche d'une figure:</label>
-      <input type="search" id="site-search" name="q" /> 
-      <button>Search</button> <!--faut préciser l'action qui est enclenchée par le bouton -->
+      <input type="search" id="site-search" name="fig_searched_by_user" /> 
+      <button type="submit">Search</button> <!--faut préciser l'action qui est enclenchée par le bouton -->
     </div>
     <div id ="response-box" style = "background-color: lightcoral;">Ici seront affichés les résultats</div>
-
+    </form>
   </body>
 </html>
