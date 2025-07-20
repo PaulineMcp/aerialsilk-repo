@@ -16,3 +16,46 @@
     </form>
   </body>
 </html>
+
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Recherche AJAX</title>
+</head>
+<body>
+  <form id="formRecherche">
+    <input type="text" name="q" id="champRecherche" placeholder="Votre recherche">
+    <button type="submit">Rechercher</button>
+  </form>
+
+  <div id="resultat"></div>
+
+  <script>
+    const form = document.getElementById('formRecherche');
+    const input = document.getElementById('champRecherche');
+    const resultatDiv = document.getElementById('resultat');
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault(); // empêche le rechargement de page
+
+      const query = input.value;
+
+      const res = await fetch(`/recherche?q=${encodeURIComponent(query)}`);
+      const data = await res.json();
+
+      // Affichage simple du résultat JSON
+      resultatDiv.innerHTML = `
+        <h2>Résultats :</h2>
+        <pre>${JSON.stringify(data, null, 2)}</pre>
+      `;
+
+      // Tu peux aussi afficher de manière plus personnalisée :
+      // resultatDiv.innerHTML = `<p>${data.nom}</p>` etc.
+    });
+  </script>
+</body>
+</html>
+

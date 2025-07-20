@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width" />
+        <title>test avec Ajax</title>
+    </head>
+    <body>
+        <div>Test de page de recherche avec AJAX</div>
+        <form id ="formulaire">
+            <input type="text" name="user_search" id= "user_search" placeholder="Tapez votre recherche">
+            <button type="submit">Go</button>
+        </form>
+
+        <div id="resultat"></div>
+
+        <!--<video controls="" width="600">
+            <source id="video_link" type="video/mp4" src=""/>
+        </video><-->
+
+        <script> // Encapsulation du code js qui sert à rendre les résultats dynamiques
+
+        
+        const user_search = document.getElementById('user_search'); // Récupération de l'input de l'utilisateur
+        const form = document.getElementById('formulaire'); // Récupération du formulaire
+        const result_container = document.getElementById('resultat')
+        // Quand le formulaire est soumis, cela déclanche l'évènement
+        form.addEventListener('submit', async (e) => {
+            console.log('test')
+            e.preventDefault(); // empêche le rechargement de page
+
+            const requete = user_search.value;
+            const res = await fetch(`/sql_user_request_criteria?fig_searched_by_user=${encodeURIComponent(requete)}`); // fetch envoi la requete à l'API et encodeURI permet de ne pas "pervertir" l'input de l'utilisateur avec des caractères spéciaux
+            const data = await res.json();
+            console.log(data[0]);
+            // Injection des résultats dans le body du html
+            // on le vide de la recherche précédente
+            result_container.innerHTML = "";
+
+            data.forEach(fig => {
+            // pour chaque résultat on créé un item de block
+            const block_result_item = document.createElement('div')
+            block_result_item.style.border = "3px solid blue";
+
+            // puis on lui injecte du html
+            block_result_item.innerHTML = `
+                    <h3> Nom : ${fig.name_fig}</h3>
+                    <h4> Mots-clés : ${fig.keywords_clean}</h4>
+                    <p>${fig.video_link}</p>
+                `
+            
+            // dans l'arbre DOM on le place comme enfant de resultat_container  + // Injection des resultats dans le block de resultat
+            result_container.appendChild(block_result_item);});
+            
+            
+
+            // injection de la vidéo
+
+            // On va désactiver toute la partie vidéo le temps de paramétrer le moteur de recherche
+            //const video = document.querySelector('video');
+            //const video_display = document.getElementById('video_link');
+            //video_display.src = `${data[0].video_link}`;
+            //video.load(); // indique qu'il faut recharger la video puisqu'elle a été chargée dynamiquement par le JS
+            //video.play(); // lance la lecture automatiquement
+
+            
+
+            // on change son 'statut' pour pouvoir l'afficher
+            result_container.style.display = "block";
+
+        });
+        </script>
+    </body>
+
+</html>

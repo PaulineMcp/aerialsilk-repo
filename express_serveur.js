@@ -86,13 +86,13 @@ app.get('/sql_request',(req,res) => {
 // Route avec un critère 
 app.get('/sql_user_request_criteria',(req,res) => {
   var user_search = req.query.fig_searched_by_user;
-  //user_search = user_search.replaceAll('"', '');
+  user_search = user_search.replaceAll('"', '');
   console.log(user_search);
-  sql_raw_request = 'SELECT * FROM figures WHERE name_fig="';
-  sql_request = sql_raw_request.concat("",user_search).concat("",'"');
+  sql_request = `SELECT name_fig, keywords_clean, video_link, MATCH(name_fig, keywords_clean) AGAINST('${user_search}') AS score FROM figures WHERE MATCH(name_fig, keywords_clean) AGAINST('${user_search}') > 0.2 ORDER BY score DESC;`
   console.log(sql_request);
 
   connection.query(sql_request,(err, results) => {
+  console.log(results);
   res.send(results); }); 
 });
 
